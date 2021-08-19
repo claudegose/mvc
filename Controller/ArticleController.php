@@ -23,7 +23,18 @@ class ArticleController
     private function getArticles()
     {
         require_once 'config.php';
+        require_once 'Classes/DatabaseManager.php';
 
+        // prepare the database connection
+//        var_dump($config['password']);
+        $databaseManager = new DatabaseManager($config['host'], $config['user'], $config['password'], $config['dbname']);
+        $databaseManager->connect();
+
+
+        // TODO: fetch all articles as $rawArticles (as a simple array)
+        $sql = "SELECT * FROM articles";
+        $result = $databaseManager->connection->query($sql)->fetchAll();
+        $rawArticles = $result;
 
         $articles = [];
         foreach ($rawArticles as $rawArticle) {
@@ -34,8 +45,8 @@ class ArticleController
         return $articles;
     }
 
-    public function show()
-    {
-        // TODO: this can be used for a detail page
-    }
+//    public function show()
+//    {
+//        // TODO: this can be used for a detail page
+//    }
 }
