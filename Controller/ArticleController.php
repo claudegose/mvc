@@ -2,24 +2,28 @@
 
 declare(strict_types = 1);
 
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 class ArticleController
+
 {
     public function index()
+
     {
         // Load all required data
-        $users = $this->getUsers();
+        $articles = $this->getArticles();
 
         // Load the view
         require 'View/articles/index.php';
     }
 
     // Note: this function can also be used in a repository - the choice is yours
-    private function getUsers()
+    private function getArticles()
     {
-        // TODO: prepare the database connection
-        // Note: you might want to use a re-usable databaseManager class - the choice is yours
-        // TODO: fetch all articles as $rawArticles (as a simple array)
-        $rawArticles = [];
+        require_once 'config.php';
+
 
         $articles = [];
         foreach ($rawArticles as $rawArticle) {
